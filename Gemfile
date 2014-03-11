@@ -5,6 +5,7 @@ gem 'activesupport', require: 'active_support'
 gem 'uglifier'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
+gem 'slim'
 
 group :development, :test do
   gem "better_errors"
