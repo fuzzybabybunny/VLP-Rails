@@ -18,8 +18,12 @@ footer
   #footer
     .container
       p.muted.credit
-        a.footer-text href="/privacy" Privacy Policy
-        | &bull;
-        a.footer-text href="/terms" Terms and Conditions
-        | &bull;
+        span.footer-text
+          = link_to "Privacy Policy", privacy_url
+        span.footer-text
+          | &bull;
+        span.footer-text
+          = link_to "Terms of Use", terms_url
+        span.footer-text
+          | &bull;
         span.footer-text &copy; 2014 Victor Lin Photography
