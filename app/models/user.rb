@@ -14,9 +14,14 @@ class User
 
   before_save :encrypt_password
 
+  protected
+
   def encrypt_password
-    puts "Encrypting Password: #{self.password}"
-    false
+    # generates the salt and the fish if the password is present
+    if password.present?
+      self.salt = BCrypt::Engine.generate_salt
+      self.fish = BCrypt::Engine.hash_secret(password, self.salt)
+    end
     # false tells Mongoid not to save it.
   end
 
