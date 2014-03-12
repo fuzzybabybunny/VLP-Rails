@@ -14,6 +14,20 @@ class User
 
   before_save :encrypt_password
 
+  def self.authenticate(email, password)
+    user = User.find_by email: email
+    user if user and user.authenticate(password)
+    # if user and user.authenticate(password)
+    #   user
+    # else
+    #   nil
+    # end
+  end
+
+  def authenticate(password)
+    self.fish == BCrypt::Engine.hash_secret(password, self.salt)
+  end
+
   protected
 
   def encrypt_password
