@@ -1,6 +1,7 @@
 class SiteController < ApplicationController
 
   def index
+    @user = User.all.entries
   end
 
   def privacy
