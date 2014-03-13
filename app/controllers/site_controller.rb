@@ -11,4 +11,10 @@ class SiteController < ApplicationController
   def terms
   end
 
+  def stuff
+  end
+
+  def shit
+  end
+
 end
