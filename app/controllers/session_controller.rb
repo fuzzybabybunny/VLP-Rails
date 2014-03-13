@@ -7,7 +7,14 @@ class SessionController < ApplicationController
   end
 
   def create
-    render text: User.authenticate(params[:user][:email], params[:user][:password]).email
+    @user = User.authenticate(params[:user][:email], params[:user][:password])
+    if @user
+      session[:user_id] = @user.id
+      render text: "Logged in #{@user.email}!"
+    else
+      render text: "Incorrect Password"
+    end
+
   end
 
   def destroy
