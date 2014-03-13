@@ -7,7 +7,7 @@ class SessionController < ApplicationController
   end
 
   def create
-    render text: "Log the user in."
+    render text: User.authenticate(params[:user][:email], params[:user][:password]).email
   end
 
   def destroy

@@ -10,7 +10,7 @@
 User.destroy_all
 
 User.create([
-  { email: "victor@victorlinphoto.com"},
+  { email: "victor@victorlinphoto.com", password: "123", password_confirmation: "123"},
   { email: "alex@victorlinphoto.com"},
   { email: "rabidsoggymoose@gmail.com"}
   ])
