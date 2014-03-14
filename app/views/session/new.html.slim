@@ -10,7 +10,7 @@ main.container role="main"
 
               fieldset
                 legend Please Sign In
-                .form-group = @messages
+                .form-group = flash.map {|key, value| "#{key.capitalize}: #{value}"}.join(";")
                 .form-group
                   = f.label :email, class: "sr-only control-label"
                   = f.text_field :email, class: "form-control", placeholder: "Email Address"
