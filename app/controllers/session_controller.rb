@@ -9,8 +9,9 @@ class SessionController < ApplicationController
   def create
     @user = User.authenticate(params[:user][:email], params[:user][:password])
     if @user
+      # session is part of rails
       session[:user_id] = @user.id
-      render text: "Logged in #{@user.email}!"
+      redirect_to root_url
     else
       render text: "Incorrect Password"
     end
@@ -18,6 +19,7 @@ class SessionController < ApplicationController
   end
 
   def destroy
+    session[:user_id] = nil
     render text: "Log the user out."
   end
 
