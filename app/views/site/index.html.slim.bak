@@ -1,29 +1,25 @@
 header role="banner"
   h1.marketing.nav-bar-inverse Order Form Login
+  p = @authenticatedConfirmation
 main.container role="main"
   ol
-    - @user.each do |some_user|
-      li
-        = some_user.email
   .row
     .col-md-4.col-md-offset-4
       = form_for :user, url: login_url, html: { id: "loginform" } do |f|
-      / form#login-form accept-charset="UTF-8" action="#" method="post"
+
         fieldset
           legend Please Sign In
           .form-group
             = f.label :email, class: "sr-only control-label"
-            = f.text_field :email, id: "user-email", placeholder: "Email Address"
-            / label.sr-only.control-label for="user-email"  Email
-            / input#user-email name="user[email]" placeholder=("Email Address") type="text"
+            = f.text_field :email, class: "form-control", placeholder: "Email Address"
+
           .form-group
             = f.label :password, class: "sr-only control-label"
-            = f.password_field :password, id: "user-password", placeholder: "Password"
-            / label.sr-only.control-label for="user-password"  Password
-            / input#user-password name="user[password]" placeholder="Password" type="password"
+            = f.password_field :password, class: "form-control", placeholder: "Password"
+
           .form-group
             = f.submit "Sign in", class: "btn btn-success"
-            / input.btn.btn-success.control-label type="submit" value=("Sign In")
+
 footer
   #footer
     .container
@@ -37,3 +33,11 @@ footer
         span.footer-text
           | &bull;
         span.footer-text &copy; 2014 Victor Lin Photography
+
+p
+  | Hi there (form code here)
+
+ol
+  - @users.each do |some_user|
+    li
+      = some_user.email

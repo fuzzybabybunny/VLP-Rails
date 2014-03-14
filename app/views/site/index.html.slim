@@ -1,35 +1,8 @@
-header role="banner"
-  h1.marketing.nav-bar-inverse Order Form Login
-  p = @authenticatedConfirmation
-main.container role="main"
-  ol
-  .row
-    .col-md-4.col-md-offset-4
-      = form_for :user, url: login_url, html: { id: "loginform" } do |f|
 
-        fieldset
-          legend Please Sign In
-          .form-group
-            = f.label :email, class: "sr-only control-label"
-            = f.text_field :email, class: "form-control", placeholder: "Email Address"
+p
+  | Hi there (form code here)
 
-          .form-group
-            = f.label :password, class: "sr-only control-label"
-            = f.password_field :password, class: "form-control", placeholder: "Password"
-
-          .form-group
-            = f.submit "Sign in", class: "btn btn-success"
-
-footer
-  #footer
-    .container
-      p.muted.credit
-        span.footer-text
-          = link_to "Privacy Policy", privacy_url
-        span.footer-text
-          | &bull;
-        span.footer-text
-          = link_to "Terms of Use", terms_url
-        span.footer-text
-          | &bull;
-        span.footer-text &copy; 2014 Victor Lin Photography
+ol
+  - @users.each do |some_user|
+    li
+      = some_user.email

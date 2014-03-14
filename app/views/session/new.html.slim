@@ -1,14 +1,22 @@
-= form_for :user, url: login_url, html: { id: "loginform" } do |f|
+header role="banner"
+  h1.marketing.nav-bar-inverse Order Form Login
+  p = @authenticatedConfirmation
+main.container role="main"
+  ol
+  .row
+    .col-md-4.col-md-offset-4
 
-        fieldset
-          legend Please Sign In
-          .form-group
-            = f.label :email, class: "sr-only control-label"
-            = f.text_field :email, class: "form-control", placeholder: "Email Address"
+      = form_for :user, url: login_url, html: { id: "loginform" } do |f|
 
-          .form-group
-            = f.label :password, class: "sr-only control-label"
-            = f.password_field :password, class: "form-control", placeholder: "Password"
+              fieldset
+                legend Please Sign In
+                .form-group
+                  = f.label :email, class: "sr-only control-label"
+                  = f.text_field :email, class: "form-control", placeholder: "Email Address"
 
-          .form-group
-            = f.submit "Sign in", class: "btn btn-success"
+                .form-group
+                  = f.label :password, class: "sr-only control-label"
+                  = f.password_field :password, class: "form-control", placeholder: "Password"
+
+                .form-group
+                  = f.submit "Sign in", class: "btn btn-success"

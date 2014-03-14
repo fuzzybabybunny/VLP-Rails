@@ -3,9 +3,10 @@ class SessionController < ApplicationController
   # index is a Ruby action aka a Ruby method, renders a view for us
   # corresponds to views/site/index.html.erb
   def new
-    render text: "Display the Login Form here."
+    # render text: "Display the Login Form here."
   end
 
+  # creates the session
   def create
     @user = User.authenticate(params[:user][:email], params[:user][:password])
     if @user
