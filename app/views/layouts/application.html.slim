@@ -7,10 +7,10 @@ html
     = javascript_include_tag "application"
     = csrf_meta_tags
     link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"
-    link rel="stylesheet" href="/css/application.css"
 
   body
     == yield
+    == render partial: "layouts/messages"
 
 footer
   #footer
