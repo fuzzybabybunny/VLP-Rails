@@ -1,4 +1,5 @@
 require 'bcrypt'
+PASSWORD_RESET_EXPIRES = 4
 
 class User
   include Mongoid::Document
@@ -10,11 +11,15 @@ class User
   # field is kind of a Mongo thing, like attr_accessor but from the MongoDB
   field :email, type: String
 
-  # User for encryption
+  # Used for encryption
   field :salt, type: String
   field :fish, type: String
 
-  before_save :encrypt_password
+  # Used for sending out a password reset email
+  field :code, type: String
+  field :expires_at, type: Time
+
+  before_save :set_random_password, :encrypt_password
   validates :email, presence: true, uniqueness: {case_sensitive: false}
 
   # class method, just like user.new is a class method, creates a new instance
@@ -31,6 +36,16 @@ class User
   # instance method
   def authenticate(password)
     self.fish == BCrypt::Engine.hash_secret(password, self.salt)
+  end
+
+  def set_password_reset
+    self.code = SecureRandom.urlsafe_base64
+    set_expiration
+  end
+
+  def set_expiration
+    self.expires_at = PASSWORD_RESET_EXPIRES.hours.from_now
+    self.save!
   end
 
   protected
