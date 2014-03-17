@@ -35,20 +35,20 @@ class User
 
   protected
 
-  def set_random_password
-    if self.fish.blank? and password.present?
-      self.salt = BCrypt::Engine.generate_salt
-      self.fish = BCrypt::Engine.hash_secret(SecureRandom.base64(32), self.salt)
+    def set_random_password
+      if self.fish.blank? and password.blank?
+        self.salt = BCrypt::Engine.generate_salt
+        self.fish = BCrypt::Engine.hash_secret(SecureRandom.base64(32), self.salt)
+      end
     end
-  end
 
-  def encrypt_password
-    # generates the salt and the fish if the password is present
-    if password.present?
-      self.salt = BCrypt::Engine.generate_salt
-      self.fish = BCrypt::Engine.hash_secret(password, self.salt)
+    def encrypt_password
+      # generates the salt and the fish if the password is present
+      if password.present?
+        self.salt = BCrypt::Engine.generate_salt
+        self.fish = BCrypt::Engine.hash_secret(password, self.salt)
+      end
+      # false tells Mongoid not to save it.
     end
-    # false tells Mongoid not to save it.
-  end
 
 end
