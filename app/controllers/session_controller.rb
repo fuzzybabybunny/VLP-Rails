@@ -10,13 +10,14 @@ class SessionController < ApplicationController
 
   # creates the session
   def create
+    # @user = User.authenticate(params[:user][:email], params[:user][:password])
+    user = User.find_by(email: params[:user][:email])
+    password = params[:user][:password]
 
-    @user = User.authenticate(params[:user][:email], params[:user][:password])
-
-
-    if @user
-      # session is part of rails
-      session[:user_id] = @user.id
+    if password.blank?
+      render text: "Time to reset password" #for any account, valid or not
+    elsif user and user.authenticate(password)
+      session[:user_id] = user.id
       redirect_to root_url
     else
       flash.now[:alert] = "Unable to log you in. Please check your email and password and try again."
@@ -24,6 +25,7 @@ class SessionController < ApplicationController
     end
 
   end
+
 
   def destroy
     session[:user_id] = nil
