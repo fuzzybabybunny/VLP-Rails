@@ -5,6 +5,7 @@ class SessionController < ApplicationController
   def new
     # @messages = flash.map {|key, value| "#{key.capitalize}: #{value}"}.join(";")
     # render text: "Display the Login Form here."
+    redirect_to root_url, notice: "You are already logged in." if current_user
   end
 
   # creates the session

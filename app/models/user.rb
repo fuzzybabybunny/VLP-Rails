@@ -15,6 +15,7 @@ class User
   field :fish, type: String
 
   before_save :encrypt_password
+  validates :email, presence: true, uniqueness: {case_sensitive: false}
 
   # class method, just like user.new is a class method, creates a new instance
   def self.authenticate(email, password)
@@ -33,6 +34,13 @@ class User
   end
 
   protected
+
+  def set_random_password
+    if self.fish.blank? and password.present?
+      self.salt = BCrypt::Engine.generate_salt
+      self.fish = BCrypt::Engine.hash_secret(SecureRandom.base64(32), self.salt)
+    end
+  end
 
   def encrypt_password
     # generates the salt and the fish if the password is present

@@ -3,6 +3,8 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
 
 
+  helper_method :current_user
+
   def is_authenticated?
 
     redirect_to login_url unless current_user

@@ -31,6 +31,10 @@
       margin: 0 auto -60px;
     }
 
+    .logout-button {
+      margin-top: 8px;
+    }
+
     .marketing {
       text-align: center;
       color: #5a5a5a;
