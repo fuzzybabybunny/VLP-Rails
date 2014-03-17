@@ -1,0 +1,11 @@
+= form_for @user, url: reset_url(@user.code), method: :patch, html: { id: "resetform"} do |f|
+  fieldset
+    legend Choose a new password
+    .form-group
+      = f.label :password, class: "sr-only"
+      = f.password_field :password, class: "form-control", placeholder: "New Password"
+    .form-group
+      = f.label :password_confirmation, class: "sr-only"
+      = f.password_field :password_confirmation, class: "form-control", placeholder: "Type it again"
+    .form-group
+      = f.submit "Update Password", class: "btn btn-success"

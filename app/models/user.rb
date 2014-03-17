@@ -21,6 +21,7 @@ class User
 
   before_save :set_random_password, :encrypt_password
   validates :email, presence: true, uniqueness: {case_sensitive: false}
+  validates :password, confirmation: true
 
   # class method, just like user.new is a class method, creates a new instance
   def self.authenticate(email, password)
