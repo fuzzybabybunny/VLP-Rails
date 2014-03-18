@@ -24,7 +24,7 @@ class User
   validates :password, confirmation: true
 
   # class method, just like user.new is a class method, creates a new instance
-  def self.authenticate(email, password)
+  def self.authenticate email, password
     user = User.find_by email: email
     user if user and user.authenticate(password)
     # if user and user.authenticate(password)
@@ -34,8 +34,12 @@ class User
     # end
   end
 
+  def self.find_by_code code
+    User.find_by({:code => code, :expires_at => {"$gte" => Time.now.gmtime}})
+  end
+
   # instance method
-  def authenticate(password)
+  def authenticate password
     self.fish == BCrypt::Engine.hash_secret(password, self.salt)
   end
 
