@@ -15,4 +15,5 @@ group :development, :test do
   gem "pry"
   gem "binding_of_caller"
   gem "letter_opener"
+  gem "quiet_assets"
 end

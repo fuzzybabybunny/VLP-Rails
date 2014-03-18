@@ -23,7 +23,7 @@ class User
   validates :email, presence: true, uniqueness: {case_sensitive: false}
   validates :password, confirmation: true
 
-  # class method, just like user.new is a class method, creates a new instance
+  # class method, just like user.new is a class method, creates a new instance, called with a capital U of User
   def self.authenticate email, password
     user = User.find_by email: email
     user if user and user.authenticate(password)
@@ -36,7 +36,7 @@ class User
     user
   end
 
-  # instance method
+  # instance method, we have already found a user, called with a lowercase letter like u.authenticate or a.authenticate5
   def authenticate password
     self.fish == BCrypt::Engine.hash_secret(password, self.salt)
   end
