@@ -1,5 +1,4 @@
 require 'bcrypt'
-PASSWORD_RESET_EXPIRES = 4
 
 class User
   include Mongoid::Document
@@ -36,10 +35,10 @@ class User
     user
   end
 
-  # instance method, we have already found a user, called with a lowercase letter like u.authenticate or a.authenticate5
   def authenticate password
     self.fish == BCrypt::Engine.hash_secret(password, self.salt)
   end
+
 
   def set_password_reset
     self.code = SecureRandom.urlsafe_base64
@@ -48,8 +47,16 @@ class User
 
   def set_expiration
     self.expires_at = PASSWORD_RESET_EXPIRES.hours.from_now
-    self.save!
+    self.save
   end
+
+  def reset_password(params)
+    if self.update_attributes(params)
+      self.update_attributes(params.merge( code: nil, expires_at: nil ))
+    end
+  end
+
+
 
   protected
 

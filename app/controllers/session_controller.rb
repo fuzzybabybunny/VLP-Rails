@@ -7,24 +7,28 @@ class SessionController < ApplicationController
   end
 
   def create
-    user = User.find_by(email: params[:user][:email])
-    password = params[:user][:password]
-
-    if user
-      if password.blank?
-        #password reset
-        PasswordResetter.new(flash).handle_password_reset(user)
-        render :new
-      else
-        #authenticate
-        UserAuthenticator.new(session, flash).handle_authenticate_user(user)
-        redirect_to root_url
-      end
+    if params[:user][:password].blank?
+      #password reset flow
+      PasswordResetter.new(flash).handle_reset_request(user_params)
     else
-      # error msg :user not exists
-      flash[:alert]= "Email or Password wrong. Please check and try again."
-      render :new
+      #authenticate password flow
+      UserAuthenticator.new(session,flash).authenticate_user(user_params)
     end
+    (redirect_to root_url and return) if flash.empty?
+    render :new
   end
+
+  def destroy
+    session[:user_id] = nil
+    # render text: "Log the user out."
+    redirect_to login_url, notice: "You've successfully logged out."
+  end
+
+  private
+
+  def user_params
+    params.require(:user).permit(:email, :password)
+  end
+
 
 end

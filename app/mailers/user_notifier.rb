@@ -9,6 +9,10 @@ class UserNotifier < ActionMailer::Base
 
 
   def password_was_reset(user)
+
+    @user = user
+    mail to: @user.email, subject: "[ToddyCat] Your Password has been Reset!"
+
   end
 
 
