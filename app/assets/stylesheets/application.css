@@ -12,75 +12,57 @@
  *= require_tree .
  */
 
-    /* Sticky footer styles
-    -------------------------------------------------- */
+html,
+body {
+  height: 100%;
+  /*background-color: hsla( 0, 0.0%, 100.0%, 1 );*/
+}
 
-    html,
-    body {
-      height: 100%;
-      /*background-image: url("../images/login-background.jpeg");*/
-      /* The html and body elements cannot have any padding or margin. */
-    }
+#wrap {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin: 0 auto -60px; /* Negative indent footer by its height */
+  padding: 0 0 60px;    /* Pad bottom by footer height */
+}
 
-    /* Wrapper for page content to push down footer */
-    #wrap {
-      min-height: 100%;
-      height: auto !important;
-      height: 100%;
-      /* Negative indent footer by it's height */
-      margin: 0 auto -60px;
-    }
+h1 {
+  margin: 0;
+  padding: 0;
+}
 
-    .logout-button {
-      margin-top: 8px;
-    }
+legend {
+  text-align: left;
+  font-size: 130%;
+  line-height: 1.5;
+  color: #5cb85c;
+  border-bottom: 1px solid #5cb85c;
+}
 
-    .marketing {
-      text-align: center;
-      color: #5a5a5a;
-    }
+.main {
+  padding-top: 80px;
+}
 
-    /* Set the fixed height of the footer here */
-    #push,
-    #footer {
-      height: 60px;
-    }
-    #footer {
-      background-color: #f5f5f5;
-    }
+footer {
+  height: 60px;
+  background-color: hsla( 0, 0.0%, 96.0%, 1 );
+}
 
-    /* Lastly, apply responsive CSS fixes as necessary */
-    @media (max-width: 767px) {
-      #footer {
-        margin-left: -20px;
-        margin-right: -20px;
-        padding-left: 20px;
-        padding-right: 20px;
-      }
-    }
+.container .credit {
+  text-align: right;
+  margin: 20px 0;
+}
 
-    .credit {
-      text-align: center;
-      color: #5a5a5a;
+footer > .container {
+  padding-left: 15px;
+  padding-right: 15px;
+}
 
-    }
+.noty_text {
+  font-size : 18px;
+  font-weight: normal;
+}
 
-    .footer-text {
-      padding-right: 5px;
-      padding-left: 5px;
-    }
-
-    /* Custom page CSS
-    -------------------------------------------------- */
-    /* Not required for template or sticky footer method. */
-
-    #wrap > .container {
-      padding-top: 60px;
-    }
-    .container .credit {
-      margin: 20px 0;
-    }
-
-    code {
-      font-size: 80%;
-    }
+.logout-link {
+  margin-top: 8px;
+}

@@ -1,7 +1,7 @@
 - flash.each do |name, message|
   - if message.is_a?(String) || message.is_a?(ActiveModel::Errors)
     - notyType = (name == :notice ? "success" : "error")
-    - notyTimeout = (name == :notice ? 4000 : 3000)
+    - notyTimeout = (name == :notice ? 4000 : 30000 )
 
     - if message.is_a? (ActiveModel::Errors)
       - notyText = "It's an error object"
@@ -11,7 +11,7 @@
     javascript:
       $(function() {
         noty({
-          layout: "top",
+          layout: 'top',
           type: "#{notyType}",
           timeout: "#{notyTimeout}",
           text: "#{notyText}"

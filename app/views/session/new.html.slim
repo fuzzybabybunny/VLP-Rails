@@ -1,25 +1,14 @@
-header role="banner"
-  h1.marketing.nav-bar-inverse Order Form Login
-  p = @authenticatedConfirmation
-main.container role="main"
-  ol
-  .row
-    .col-md-4.col-md-offset-4
+= form_for :user, url: login_url, html: { id: "loginform" } do |f|
+  fieldset
+    legend Please sign in
+    / .form-group = flash.map {| key, value| "#{key.capitalize}: #{value}"}.join(";")
+    .form-group
+      = f.label :email, class: "sr-only"
+      = f.text_field :email, class: "form-control", placeholder: "Email address"
+    .form-group
+      = f.label :password, class: "sr-only"
+      = f.password_field :password, class: "form-control", placeholder: "Password"
+    .form-group
+      = f.submit "Sign in", class: "btn btn-success"
 
-      = form_for :user, url: login_url, html: { id: "loginform" } do |f|
-
-              fieldset
-                legend Please Sign In
-                / .form-group = flash.map {|key, value| "#{key.capitalize}: #{value}"}.join(";")
-                .form-group
-                  = f.label :email, class: "sr-only control-label"
-                  = f.text_field :email, class: "form-control", placeholder: "Email Address"
-
-                .form-group
-                  = f.label :password, class: "sr-only control-label"
-                  = f.password_field :password, class: "form-control", placeholder: "Password"
-
-                .form-group
-                  = f.submit "Sign in", class: "btn btn-success"
-
-      p To reset your password, simply leave the password field blank and submit the form.
+p To reset your password, simply leave the password field blank and submit the form.

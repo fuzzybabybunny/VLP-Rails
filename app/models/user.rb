@@ -1,20 +1,18 @@
 require 'bcrypt'
 
+PASSWORD_RESET_EXPIRES = 4
+
 class User
+
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  # attr_accessor is a ruby thing
   attr_accessor :password, :password_confirmation
 
-  # field is kind of a Mongo thing, like attr_accessor but from the MongoDB
-  field :email, type: String
 
-  # Used for encryption
+  field :email, type: String
   field :salt, type: String
   field :fish, type: String
-
-  # Used for sending out a password reset email
   field :code, type: String
   field :expires_at, type: Time
 
@@ -22,7 +20,6 @@ class User
   validates :email, presence: true, uniqueness: {case_sensitive: false}
   validates :password, confirmation: true
 
-  # class method, just like user.new is a class method, creates a new instance, called with a capital U of User
   def self.authenticate email, password
     user = User.find_by email: email
     user if user and user.authenticate(password)
@@ -56,8 +53,6 @@ class User
     end
   end
 
-
-
   protected
 
     def set_random_password
@@ -68,12 +63,10 @@ class User
     end
 
     def encrypt_password
-      # generates the salt and the fish if the password is present
       if password.present?
         self.salt = BCrypt::Engine.generate_salt
         self.fish = BCrypt::Engine.hash_secret(password, self.salt)
       end
-      # false tells Mongoid not to save it.
     end
 
 end

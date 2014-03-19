@@ -1,29 +1,33 @@
 doctype html
 html
   head
-  meta charset="UTF-8"
-    title Order Form Prelim
+    title ToddyCat
+    link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" media="all" rel="stylesheet"
     = stylesheet_link_tag "application", media: "all"
     = javascript_include_tag "application"
     = csrf_meta_tags
-    link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"
 
   body
-    span.pull-right
-      = link_to "Logout", logout_url, method: :delete, class: "logout-button btn btn-danger" if current_user
-    == yield
-    == render partial: "layouts/messages"
 
-footer
-  #footer
-    .container
-      p.muted.credit
-        span.footer-text
-          = link_to "Privacy Policy", privacy_url
-        span.footer-text
-          | &bull;
-        span.footer-text
-          = link_to "Terms of Use", terms_url
-        span.footer-text
-          | &bull;
-        span.footer-text &copy; 2014 Victor Lin Photography
+    #wrap
+
+      header.navbar.navbar-inverse.navbar-fixed-top role="banner"
+        .container
+          .pull-right
+            = link_to "Log Out", logout_url, method: :delete, class: "btn btn-danger logout-link" if current_user
+          h1.navbar-brand ToddyCat
+
+      main.container.main role="main"
+        .row
+          .col-md-4.col-md-offset-4
+            == yield
+            == render partial: "layouts/messages"
+    footer
+      .container
+        .row
+          p.text-muted.credit
+            = link_to "Privacy Policy", privacy_url
+            | &bull;
+            = link_to "Terms of Use", terms_url
+            | &bull;
+            | &copy; 2013 ToddyCat

@@ -1,13 +1,9 @@
 class SiteController < ApplicationController
 
-  # index is a Ruby action aka a Ruby method, renders a view for us
-  # corresponds to views/site/index.html.erb
-
   before_action :is_authenticated?
 
   def index
-    # @authenticatedConfirmation = is_authenticated?
-    # render text: is_authenticated?
+    # render json: User.all.entries
     @users = User.all.entries
   end
 
@@ -17,10 +13,8 @@ class SiteController < ApplicationController
   def terms
   end
 
-  def stuff
-  end
-
-  def shit
+  def wdi
+    @fuck = "you"
   end
 
 end
